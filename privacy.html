@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー - Mailet</title>
+  <meta name="description" content="家計簿アプリ「Mailet」のプライバシーポリシーです。個人情報の取り扱いおよびデータセキュリティについて説明します。">
+  <style>
+    :root {
+      --primary: #0071e3;
+      --primary-hover: #0077ed;
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --border: #d2d2d7;
+      --accent: #e8f2ff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #2997ff;
+        --primary-hover: #47a7ff;
+        --bg: #000000;
+        --card-bg: #1c1c1e;
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --border: #38383a;
+        --accent: #152942;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 18px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    h2:first-of-type {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background-color: var(--accent);
+      border-left: 4px solid var(--primary);
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .contact-box {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← サポートトップへ戻る</a>
+
+    <header>
+      <h1>プライバシーポリシー</h1>
+      <p class="last-updated">制定日: 2026年7月20日 ｜ 最終改定日: 2026年10月13日</p>
+    </header>
+
+    <div class="card">
+      <p>
+        本アプリ「Mailet」（以下「本アプリ」）の提供者（以下「提供者」）は、本アプリにおけるユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
+      </p>
+
+      <h2>1. 収集する情報およびその取得方法</h2>
+      <p>本アプリでは、以下の情報を取得・利用することがあります。</p>
+      <ul>
+        <li>
+          <strong>ユーザーが直接入力・同期するデータ:</strong> 家計簿の入力データ（金額、カテゴリ、日付、メモ、メールから自動解析された取引データなど）。これらのデータは原則として<strong>ユーザー自身の端末内（ローカル）またはユーザーが設定したiCloud等のクラウドストレージに保存</strong>され、提供者の外部サーバーに送信・蓄積されることはありません。
+        </li>
+        <li>
+          <strong>お問い合わせ時に入力いただく情報:</strong> 氏名、メールアドレス、お問い合わせ内容。これらの情報は、お問い合わせへの回答やサポート提供のためにのみ利用します。
+        </li>
+      </ul>
+
+      <h2>2. データの保存とセキュリティ</h2>
+      <p>本アプリで記録された家計データは、以下の安全な環境で保管されます。</p>
+      <ul>
+        <li>
+          <strong>サンドボックス保護:</strong> iOSが提供する安全なサンドボックス環境を利用し、他のアプリからの不正アクセスを防止します。
+        </li>
+        <li>
+          <strong>認証情報の暗号化:</strong> メール連携（Gmail等）で使用される認証トークンは、Apple Keychainに暗号化されて厳重に保管されます。連携を解除した場合は即座に完全に破棄されます。
+        </li>
+        <li>
+          <strong>iCloud同期:</strong> iCloudバックアップ・同期はユーザー自身のプライベートApple IDコンテナを利用して行われ、エンドツーエンドの暗号化によって保護されます。
+        </li>
+      </ul>
+
+      <h2>3. 個人情報の第三者提供</h2>
+      <p>
+        提供者は、ユーザーの事前の同意を得ることなく、取得した個人情報を第三者に提供することはありません。ただし、法令に基づく正当な開示請求がある場合を除きます。
+      </p>
+
+      <h2>4. 外部AIサービス（Gemini API等）の利用について</h2>
+      <p>
+        本アプリのレシート解析および高度な自動仕訳機能において、Google Gemini APIを利用する場合があります。
+      </p>
+      <ul>
+        <li>ユーザーご自身でAPIキーを設定する場合を含め、解析のために送信されるレシート画像や取引テキストは処理目的のみに使用されます。</li>
+        <li>解析データが提供者の自前サーバーに保存されることは一切ありません。</li>
+      </ul>
+
+      <h2>5. プライバシーポリシーの変更</h2>
+      <p>
+        提供者は、法令の改正やサービスの向上に伴い、本プライバシーポリシーを変更することがあります。変更した場合は、本ページにて改定日とともに速やかに通知いたします。
+      </p>
+
+      <h2>6. お問い合わせ窓口</h2>
+      <p>本ポリシーに関するご質問やご相談は、以下のサポート窓口までご連絡ください。</p>
+
+      <div class="contact-box">
+        <p><strong>Mailet サポート窓口</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">メールアドレス: <strong>mailet.app.support@gmail.com</strong></p>
+        <a href="mailto:mailet.app.support@gmail.com?subject=%E3%80%90Mailet%E3%80%91%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E5%94%8F%E3%81%84%E5%90%88%E3%82%87%E3%81%9B" class="btn">
+          サポート窓口へメールする
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 yanasezen. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
