@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー - Mailet</title>
-  <meta name="description" content="家計簿アプリ「Mailet」のプライバシーポリシーです。個人情報の取り扱いおよびデータセキュリティについて説明します。">
+  <title>プライバシーポリシー | Privacy Policy - Mailet</title>
+  <meta name="description" content="家計簿アプリ「Mailet」のプライバシーポリシーです。 / Privacy Policy for Mailet, the AI email expense tracker.">
   <style>
     :root {
       --primary: #0071e3;
@@ -47,7 +47,16 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 28px 20px 80px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .back-link {
@@ -58,11 +67,37 @@
       text-decoration: none;
       font-size: 15px;
       font-weight: 500;
-      margin-bottom: 24px;
     }
 
     .back-link:hover {
       text-decoration: underline;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 980px;
+      padding: 3px;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 980px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
     }
 
     header {
@@ -121,15 +156,6 @@
       margin-bottom: 8px;
     }
 
-    .highlight-box {
-      background-color: var(--accent);
-      border-left: 4px solid var(--primary);
-      padding: 16px;
-      border-radius: 8px;
-      margin: 20px 0;
-      font-size: 14px;
-    }
-
     .contact-box {
       background-color: var(--bg);
       border: 1px solid var(--border);
@@ -162,75 +188,179 @@
       font-size: 13px;
       color: var(--text-secondary);
     }
+
+    [data-lang-content] {
+      display: none;
+    }
+
+    html[data-active-lang="ja"] [data-lang-content="ja"],
+    html[data-active-lang="en"] [data-lang-content="en"] {
+      display: block;
+    }
   </style>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = params.get('lang');
+      var savedLang = null;
+      try { savedLang = localStorage.getItem('mailet_lang'); } catch (e) {}
+      var browserLang = (navigator.language || navigator.userLanguage || 'ja').toLowerCase();
+      var initialLang = urlLang === 'en' || urlLang === 'ja'
+        ? urlLang
+        : (savedLang === 'en' || savedLang === 'ja'
+            ? savedLang
+            : (browserLang.indexOf('ja') === 0 ? 'ja' : 'en'));
+      document.documentElement.setAttribute('data-active-lang', initialLang);
+      document.documentElement.lang = initialLang;
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
-    <a href="index.html" class="back-link">← サポートトップへ戻る</a>
+    <div class="top-bar">
+      <a href="index.html?lang=ja" class="back-link" data-lang-content="ja">← サポートトップへ戻る</a>
+      <a href="index.html?lang=en" class="back-link" data-lang-content="en">← Back to Support Home</a>
+      <div class="lang-switch" role="group" aria-label="Language switcher">
+        <button type="button" class="lang-btn" id="btn-ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+        <button type="button" class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇺🇸 English</button>
+      </div>
+    </div>
 
-    <header>
-      <h1>プライバシーポリシー</h1>
-      <p class="last-updated">制定日: 2026年7月20日 ｜ 最終改定日: 2026年10月13日</p>
-    </header>
+    <!-- ==================== 日本語 ==================== -->
+    <div data-lang-content="ja">
+      <header>
+        <h1>プライバシーポリシー</h1>
+        <p class="last-updated">制定日: 2026年7月20日 ｜ 最終改定日: 2026年10月13日</p>
+      </header>
 
-    <div class="card">
-      <p>
-        本アプリ「Mailet」（以下「本アプリ」）の提供者（以下「提供者」）は、本アプリにおけるユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
-      </p>
+      <div class="card">
+        <p>
+          本アプリ「Mailet」（以下「本アプリ」）の提供者（以下「提供者」）は、本アプリにおけるユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
+        </p>
 
-      <h2>1. 収集する情報およびその取得方法</h2>
-      <p>本アプリでは、以下の情報を取得・利用することがあります。</p>
-      <ul>
-        <li>
-          <strong>ユーザーが直接入力・同期するデータ:</strong> 家計簿の入力データ（金額、カテゴリ、日付、メモ、メールから自動解析された取引データなど）。これらのデータは原則として<strong>ユーザー自身の端末内（ローカル）またはユーザーが設定したiCloud等のクラウドストレージに保存</strong>され、提供者の外部サーバーに送信・蓄積されることはありません。
-        </li>
-        <li>
-          <strong>お問い合わせ時に入力いただく情報:</strong> 氏名、メールアドレス、お問い合わせ内容。これらの情報は、お問い合わせへの回答やサポート提供のためにのみ利用します。
-        </li>
-      </ul>
+        <h2>1. 収集する情報およびその取得方法</h2>
+        <p>本アプリでは、以下の情報を取得・利用することがあります。</p>
+        <ul>
+          <li>
+            <strong>ユーザーが直接入力・同期するデータ:</strong> 家計簿の入力データ（金額、カテゴリ、日付、メモ、メールから自動解析された取引データなど）。これらのデータは原則として<strong>ユーザー自身の端末内（ローカル）またはユーザーが設定したiCloud等のクラウドストレージに保存</strong>され、提供者の外部サーバーに送信・蓄積されることはありません。
+          </li>
+          <li>
+            <strong>お問い合わせ時に入力いただく情報:</strong> 氏名、メールアドレス、お問い合わせ内容。これらの情報は、お問い合わせへの回答やサポート提供のためにのみ利用します。
+          </li>
+        </ul>
 
-      <h2>2. データの保存とセキュリティ</h2>
-      <p>本アプリで記録された家計データは、以下の安全な環境で保管されます。</p>
-      <ul>
-        <li>
-          <strong>サンドボックス保護:</strong> iOSが提供する安全なサンドボックス環境を利用し、他のアプリからの不正アクセスを防止します。
-        </li>
-        <li>
-          <strong>認証情報の暗号化:</strong> メール連携（Gmail等）で使用される認証トークンは、Apple Keychainに暗号化されて厳重に保管されます。連携を解除した場合は即座に完全に破棄されます。
-        </li>
-        <li>
-          <strong>iCloud同期:</strong> iCloudバックアップ・同期はユーザー自身のプライベートApple IDコンテナを利用して行われ、エンドツーエンドの暗号化によって保護されます。
-        </li>
-      </ul>
+        <h2>2. データの保存とセキュリティ</h2>
+        <p>本アプリで記録された家計データは、以下の安全な環境で保管されます。</p>
+        <ul>
+          <li>
+            <strong>サンドボックス保護:</strong> iOSが提供する安全なサンドボックス環境を利用し、他のアプリからの不正アクセスを防止します。
+          </li>
+          <li>
+            <strong>認証情報の暗号化:</strong> メール連携（Gmail等）で使用される認証トークン・アプリパスワードは、Apple Keychainに暗号化されて厳重に保管されます。連携を解除した場合は即座に完全に破棄されます。
+          </li>
+          <li>
+            <strong>iCloud同期:</strong> iCloudバックアップ・同期はユーザー自身のプライベートApple IDコンテナを利用して行われ、エンドツーエンドの暗号化によって保護されます。
+          </li>
+        </ul>
 
-      <h2>3. 個人情報の第三者提供</h2>
-      <p>
-        提供者は、ユーザーの事前の同意を得ることなく、取得した個人情報を第三者に提供することはありません。ただし、法令に基づく正当な開示請求がある場合を除きます。
-      </p>
+        <h2>3. 個人情報の第三者提供</h2>
+        <p>
+          提供者は、ユーザーの事前の同意を得ることなく、取得した個人情報を第三者に提供することはありません。ただし、法令に基づく正当な開示請求がある場合を除きます。
+        </p>
 
-      <h2>4. 外部AIサービス（Gemini API等）の利用について</h2>
-      <p>
-        本アプリのレシート解析および高度な自動仕訳機能において、Google Gemini APIを利用する場合があります。
-      </p>
-      <ul>
-        <li>ユーザーご自身でAPIキーを設定する場合を含め、解析のために送信されるレシート画像や取引テキストは処理目的のみに使用されます。</li>
-        <li>解析データが提供者の自前サーバーに保存されることは一切ありません。</li>
-      </ul>
+        <h2>4. 外部AIサービス（Gemini API等）の利用について</h2>
+        <p>
+          本アプリのレシート解析および高度な自動仕訳機能において、Google Gemini APIを利用する場合があります。
+        </p>
+        <ul>
+          <li>ユーザーご自身でAPIキーを設定する場合を含め、解析のために送信されるレシート画像や取引テキストは処理目的のみに使用されます。</li>
+          <li>解析データが提供者の自前サーバーに保存されることは一切ありません。</li>
+        </ul>
 
-      <h2>5. プライバシーポリシーの変更</h2>
-      <p>
-        提供者は、法令の改正やサービスの向上に伴い、本プライバシーポリシーを変更することがあります。変更した場合は、本ページにて改定日とともに速やかに通知いたします。
-      </p>
+        <h2>5. プライバシーポリシーの変更</h2>
+        <p>
+          提供者は、法令の改正やサービスの向上に伴い、本プライバシーポリシーを変更することがあります。変更した場合は、本ページにて改定日とともに速やかに通知いたします。
+        </p>
 
-      <h2>6. お問い合わせ窓口</h2>
-      <p>本ポリシーに関するご質問やご相談は、以下のサポート窓口までご連絡ください。</p>
+        <h2>6. お問い合わせ窓口</h2>
+        <p>本ポリシーに関するご質問やご相談は、以下のサポート窓口までご連絡ください。</p>
 
-      <div class="contact-box">
-        <p><strong>Mailet サポート窓口</strong></p>
-        <p style="color: var(--text-secondary); margin-bottom: 8px;">メールアドレス: <strong>mailet.app.support@gmail.com</strong></p>
-        <a href="mailto:mailet.app.support@gmail.com?subject=%E3%80%90Mailet%E3%80%91%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E5%94%8F%E3%81%84%E5%90%88%E3%82%87%E3%81%9B" class="btn">
-          サポート窓口へメールする
-        </a>
+        <div class="contact-box">
+          <p><strong>Mailet サポート窓口</strong></p>
+          <p style="color: var(--text-secondary); margin-bottom: 8px;">メールアドレス: <strong>mailet.app.support@gmail.com</strong></p>
+          <a href="mailto:mailet.app.support@gmail.com?subject=%E3%80%90Mailet%E3%80%91%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B" class="btn">
+            サポート窓口へメールする
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== English ==================== -->
+    <div data-lang-content="en">
+      <header>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Effective Date: July 20, 2026 | Last Updated: October 13, 2026</p>
+      </header>
+
+      <div class="card">
+        <p>
+          The provider ("Provider") of the "Mailet" application ("App") establishes this Privacy Policy to explain how user information is handled within the App.
+        </p>
+
+        <h2>1. Information We Collect and How It Is Used</h2>
+        <p>The App may process the following information:</p>
+        <ul>
+          <li>
+            <strong>Data Entered or Synced by You:</strong> Budget and expense entries (amounts, categories, dates, notes, and transaction details parsed from receipt/notification emails). All such data is stored <strong>locally on your device or in your personal Apple iCloud container</strong>, and is never stored on any external server operated by the Provider.
+          </li>
+          <li>
+            <strong>Support Inquiries:</strong> Your name, email address, and message content when you contact customer support. This information is used solely to respond to your inquiry and provide support.
+          </li>
+        </ul>
+
+        <h2>2. Data Storage and Security</h2>
+        <p>Your financial data recorded in the App is protected by the following security measures:</p>
+        <ul>
+          <li>
+            <strong>iOS Sandbox Protection:</strong> Data is isolated inside the secure iOS application sandbox to prevent unauthorized access from other apps.
+          </li>
+          <li>
+            <strong>Encrypted Credentials:</strong> Email connection credentials (such as Gmail app passwords) are encrypted and stored strictly inside Apple Keychain. When you disconnect your email account, credentials are immediately and permanently erased.
+          </li>
+          <li>
+            <strong>Private iCloud Sync:</strong> Cloud backup and sync operate exclusively within your private Apple ID iCloud container protected by Apple's encryption.
+          </li>
+        </ul>
+
+        <h2>3. Disclosure to Third Parties</h2>
+        <p>
+          The Provider does not sell, share, or disclose personal information to third parties without your prior consent, except where required by applicable law.
+        </p>
+
+        <h2>4. Use of External AI Services (Google Gemini API)</h2>
+        <p>
+          The App uses the Google Gemini API for receipt scanning and automated email transaction parsing.
+        </p>
+        <ul>
+          <li>Receipt images and transaction notification texts sent for analysis (including when using your own API key) are processed solely to extract transaction fields.</li>
+          <li>No analyzed data is ever stored on any server owned or operated by the Provider.</li>
+        </ul>
+
+        <h2>5. Changes to This Privacy Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time to reflect legal requirements or feature improvements. Updates will be posted on this page along with the revised date.
+        </p>
+
+        <h2>6. Contact Us</h2>
+        <p>If you have any questions or concerns regarding this Privacy Policy, please contact us below:</p>
+
+        <div class="contact-box">
+          <p><strong>Mailet Support Team</strong></p>
+          <p style="color: var(--text-secondary); margin-bottom: 8px;">Email: <strong>mailet.app.support@gmail.com</strong></p>
+          <a href="mailto:mailet.app.support@gmail.com?subject=%5BMailet%5D%20Privacy%20Policy%20Inquiry" class="btn">
+            Email Support
+          </a>
+        </div>
       </div>
     </div>
 
@@ -238,5 +368,28 @@
       <p>&copy; 2026 yanasezen. All rights reserved.</p>
     </footer>
   </div>
+
+  <script>
+    function updateButtons(lang) {
+      var btnJa = document.getElementById('btn-ja');
+      var btnEn = document.getElementById('btn-en');
+      if (btnJa && btnEn) {
+        btnJa.classList.toggle('active', lang === 'ja');
+        btnEn.classList.toggle('active', lang === 'en');
+      }
+    }
+    function setLanguage(lang) {
+      document.documentElement.setAttribute('data-active-lang', lang);
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('mailet_lang', lang); } catch (e) {}
+      updateButtons(lang);
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+    updateButtons(document.documentElement.getAttribute('data-active-lang') || 'ja');
+  </script>
 </body>
 </html>

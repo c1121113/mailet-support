@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mailet - 公式サポート・法的情報</title>
-  <meta name="description" content="メールが届くだけで家計簿が完成！口座連携不要のAI自動記帳アプリ「Mailet」の公式サポート・規約ページです。">
+  <title>Mailet - 公式サポート・法的情報 | Official Support & Legal</title>
+  <meta name="description" content="メールが届くだけで家計簿が完成！口座連携不要のAI自動記帳アプリ「Mailet」の公式サポート・規約ページです。 / Official support and legal information for Mailet, the AI email expense tracker.">
   <style>
     :root {
       --primary: #0071e3;
@@ -47,7 +47,39 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 28px 20px 80px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 980px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 980px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
     }
 
     header {
@@ -197,68 +229,178 @@
       color: var(--text-secondary);
       margin-top: 12px;
     }
+
+    [data-lang-content] {
+      display: none;
+    }
+
+    html[ data-active-lang="ja" ] [data-lang-content="ja"],
+    html[ data-active-lang="en" ] [data-lang-content="en"] {
+      display: block;
+    }
   </style>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = params.get('lang');
+      var savedLang = null;
+      try { savedLang = localStorage.getItem('mailet_lang'); } catch (e) {}
+      var browserLang = (navigator.language || navigator.userLanguage || 'ja').toLowerCase();
+      var initialLang = urlLang === 'en' || urlLang === 'ja'
+        ? urlLang
+        : (savedLang === 'en' || savedLang === 'ja'
+            ? savedLang
+            : (browserLang.indexOf('ja') === 0 ? 'ja' : 'en'));
+      document.documentElement.setAttribute('data-active-lang', initialLang);
+      document.documentElement.lang = initialLang;
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="app-icon">✉️</div>
-      <h1>Mailet</h1>
-      <p class="tagline">メールが届くだけで家計簿が完成！口座連携不要のAI自動記帳</p>
-    </header>
+    <div class="top-bar">
+      <div class="lang-switch" role="group" aria-label="Language switcher">
+        <button type="button" class="lang-btn" id="btn-ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+        <button type="button" class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇺🇸 English</button>
+      </div>
+    </div>
 
-    <!-- 法的文書へのナビゲーション -->
-    <section class="card">
-      <h2>📜 法的要件・各種規約</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 8px;">
-        アプリのご利用に関する規約およびプライバシーポリシーは以下よりご確認いただけます。
-      </p>
-      <div class="nav-grid">
-        <a href="privacy.html" class="nav-card">
-          <h3>🔒 プライバシーポリシー</h3>
-          <p>個人情報の取り扱い、端末内保存・iCloud同期方針について</p>
+    <!-- ==================== 日本語 ==================== -->
+    <div data-lang-content="ja">
+      <header>
+        <div class="app-icon">✉️</div>
+        <h1>Mailet</h1>
+        <p class="tagline">メールが届くだけで家計簿が完成！口座連携不要のAI自動記帳</p>
+      </header>
+
+      <section class="card">
+        <h2>📜 法的要件・各種規約</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">
+          アプリのご利用に関する規約およびプライバシーポリシーは以下よりご確認いただけます。
+        </p>
+        <div class="nav-grid">
+          <a href="privacy.html?lang=ja" class="nav-card">
+            <h3>🔒 プライバシーポリシー</h3>
+            <p>個人情報の取り扱い、端末内保存・iCloud同期方針について</p>
+          </a>
+          <a href="terms.html?lang=ja" class="nav-card">
+            <h3>📄 利用規約 (EULA)</h3>
+            <p>本アプリの利用条件、免責事項、禁止行為について</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>💡 よくあるご質問 (FAQ)</h2>
+        <div class="faq-item">
+          <div class="faq-q">Q. 銀行やクレジットカードのログイン情報は必要ですか？</div>
+          <div class="faq-a">A. 一切不要です。決済完了メールから自動で解析・記帳するため、金融機関のIDやパスワードを登録する必要はありません。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. 記録した家計データはどこに保存されますか？</div>
+          <div class="faq-a">A. ユーザー様ご自身の端末内（ローカル）およびAppleが提供するプライベートiCloudにのみ安全に保管されます。運営者の外部サーバーに保存されることはありません。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. メール連携はいつでも解除できますか？</div>
+          <div class="faq-a">A. はい。アプリ内の設定画面「Gmail設定」からいつでもワンタップで連携を解除でき、認証情報は端末のKeychainから完全に消去されます。</div>
+        </div>
+      </section>
+
+      <section class="card" style="text-align: center;">
+        <h2>📮 サポート窓口</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+          機能のご質問、不具合の報告、ご意見・ご要望は、下記窓口までお気軽にお問い合わせください。
+        </p>
+        <a href="mailto:mailet.app.support@gmail.com?subject=%E3%80%90Mailet%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B" class="btn">
+          サポート窓口へメールを送る
         </a>
-        <a href="terms.html" class="nav-card">
-          <h3>📄 利用規約 (EULA)</h3>
-          <p>本アプリの利用条件、免責事項、禁止行為について</p>
+        <div class="contact-info">
+          窓口アドレス: <strong>mailet.app.support@gmail.com</strong>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== English ==================== -->
+    <div data-lang-content="en">
+      <header>
+        <div class="app-icon">✉️</div>
+        <h1>Mailet</h1>
+        <p class="tagline">Auto Budget from Your Emails — AI Expense Tracker with No Bank Logins</p>
+      </header>
+
+      <section class="card">
+        <h2>📜 Legal &amp; Policies</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">
+          Please review our Privacy Policy and Terms of Use (EULA) below.
+        </p>
+        <div class="nav-grid">
+          <a href="privacy.html?lang=en" class="nav-card">
+            <h3>🔒 Privacy Policy</h3>
+            <p>How we handle personal data, on-device storage, and private iCloud sync</p>
+          </a>
+          <a href="terms.html?lang=en" class="nav-card">
+            <h3>📄 Terms of Use (EULA)</h3>
+            <p>Terms and conditions, subscription details, disclaimers, and prohibited uses</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>💡 Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-item">
+          <div class="faq-q">Q. Do I need to enter my bank or credit card login credentials?</div>
+          <div class="faq-a">A. Never. Mailet automatically parses payment notification and receipt emails in your inbox, so you never have to share banking IDs or passwords.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. Where is my budget data stored?</div>
+          <div class="faq-a">A. All of your financial records are stored strictly on your device and in your private Apple iCloud container. We do not maintain any external database of your transactions.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. Can I disconnect my email account at any time?</div>
+          <div class="faq-a">A. Yes. You can disconnect Gmail anytime with a single tap in Settings &gt; Gmail Settings. Your credentials are immediately deleted from Apple Keychain.</div>
+        </div>
+      </section>
+
+      <section class="card" style="text-align: center;">
+        <h2>📮 Contact Support</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+          Have questions, bug reports, or feature requests? Feel free to reach out to our support team anytime.
+        </p>
+        <a href="mailto:mailet.app.support@gmail.com?subject=%5BMailet%20Support%5D%20Inquiry" class="btn">
+          Email Support
         </a>
-      </div>
-    </section>
-
-    <!-- よくあるご質問 (FAQ) -->
-    <section class="card">
-      <h2>💡 よくあるご質問 (FAQ)</h2>
-      <div class="faq-item">
-        <div class="faq-q">Q. 銀行やクレジットカードのログイン情報は必要ですか？</div>
-        <div class="faq-a">A. 一切不要です。決済完了メールから自動で解析・記帳するため、金融機関のIDやパスワードを登録する必要はありません。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Q. 記録した家計データはどこに保存されますか？</div>
-        <div class="faq-a">A. ユーザー様ご自身の端末内（ローカル）およびAppleが提供するプライベートiCloudにのみ安全に保管されます。運営者の外部サーバーに保存されることはありません。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Q. メール連携はいつでも解除できますか？</div>
-        <div class="faq-a">A. はい。アプリ内の設定画面「Gmail設定」からいつでもワンタップで連携を解除でき、認証情報は端末のKeychainから完全に消去されます。</div>
-      </div>
-    </section>
-
-    <!-- サポートお問い合わせ -->
-    <section class="card" style="text-align: center;">
-      <h2>📮 サポート窓口</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 20px;">
-        機能のご質問、不具合の報告、ご意見・ご要望は、下記窓口までお気軽にお問い合わせください。
-      </p>
-      <a href="mailto:mailet.app.support@gmail.com?subject=%E3%80%90Mailet%E3%80%91%E3%81%8A%E5%94%8F%E3%81%84%E5%90%88%E3%82%87%E3%81%9B" class="btn">
-        サポート窓口へメールを送る
-      </a>
-      <div class="contact-info">
-        窓口アドレス: <strong>mailet.app.support@gmail.com</strong>
-      </div>
-    </section>
+        <div class="contact-info">
+          Support Email: <strong>mailet.app.support@gmail.com</strong>
+        </div>
+      </section>
+    </div>
 
     <footer>
       <p>&copy; 2026 yanasezen. All rights reserved.</p>
     </footer>
   </div>
+
+  <script>
+    function updateButtons(lang) {
+      var btnJa = document.getElementById('btn-ja');
+      var btnEn = document.getElementById('btn-en');
+      if (btnJa && btnEn) {
+        btnJa.classList.toggle('active', lang === 'ja');
+        btnEn.classList.toggle('active', lang === 'en');
+      }
+    }
+    function setLanguage(lang) {
+      document.documentElement.setAttribute('data-active-lang', lang);
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('mailet_lang', lang); } catch (e) {}
+      updateButtons(lang);
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+    updateButtons(document.documentElement.getAttribute('data-active-lang') || 'ja');
+  </script>
 </body>
 </html>

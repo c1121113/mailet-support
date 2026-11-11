@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>利用規約 - Mailet</title>
-  <meta name="description" content="家計簿アプリ「Mailet」の利用規約（エンドユーザー使用許諾契約 / EULA）です。">
+  <title>利用規約 | Terms of Use (EULA) - Mailet</title>
+  <meta name="description" content="家計簿アプリ「Mailet」の利用規約（EULA）です。 / Terms of Use (EULA) for Mailet, the AI email expense tracker.">
   <style>
     :root {
       --primary: #0071e3;
@@ -47,7 +47,16 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 28px 20px 80px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .back-link {
@@ -58,11 +67,37 @@
       text-decoration: none;
       font-size: 15px;
       font-weight: 500;
-      margin-bottom: 24px;
     }
 
     .back-link:hover {
       text-decoration: underline;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 980px;
+      padding: 3px;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 980px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
     }
 
     header {
@@ -135,72 +170,174 @@
       font-size: 13px;
       color: var(--text-secondary);
     }
+
+    [data-lang-content] {
+      display: none;
+    }
+
+    html[data-active-lang="ja"] [data-lang-content="ja"],
+    html[data-active-lang="en"] [data-lang-content="en"] {
+      display: block;
+    }
   </style>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = params.get('lang');
+      var savedLang = null;
+      try { savedLang = localStorage.getItem('mailet_lang'); } catch (e) {}
+      var browserLang = (navigator.language || navigator.userLanguage || 'ja').toLowerCase();
+      var initialLang = urlLang === 'en' || urlLang === 'ja'
+        ? urlLang
+        : (savedLang === 'en' || savedLang === 'ja'
+            ? savedLang
+            : (browserLang.indexOf('ja') === 0 ? 'ja' : 'en'));
+      document.documentElement.setAttribute('data-active-lang', initialLang);
+      document.documentElement.lang = initialLang;
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
-    <a href="index.html" class="back-link">← サポートトップへ戻る</a>
+    <div class="top-bar">
+      <a href="index.html?lang=ja" class="back-link" data-lang-content="ja">← サポートトップへ戻る</a>
+      <a href="index.html?lang=en" class="back-link" data-lang-content="en">← Back to Support Home</a>
+      <div class="lang-switch" role="group" aria-label="Language switcher">
+        <button type="button" class="lang-btn" id="btn-ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+        <button type="button" class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇺🇸 English</button>
+      </div>
+    </div>
 
-    <header>
-      <h1>利用規約</h1>
-      <p class="last-updated">制定日: 2026年7月20日 ｜ 最終改定日: 2026年10月13日</p>
-    </header>
+    <!-- ==================== 日本語 ==================== -->
+    <div data-lang-content="ja">
+      <header>
+        <h1>利用規約</h1>
+        <p class="last-updated">制定日: 2026年7月20日 ｜ 最終改定日: 2026年10月13日</p>
+      </header>
 
-    <div class="card">
-      <p>
-        本利用規約（以下「本規約」）は、家計簿アプリ「Mailet」（以下「本アプリ」）の利用条件を定めるものです。ユーザーは本規約に従って本アプリをご利用ください。
-      </p>
+      <div class="card">
+        <p>
+          本利用規約（以下「本規約」）は、家計簿アプリ「Mailet」（以下「本アプリ」）の利用条件を定めるものです。ユーザーは本規約に従って本アプリをご利用ください。
+        </p>
 
-      <h2>1. 利用許諾</h2>
-      <p>
-        ユーザーは、本規約に同意することを条件として、本アプリを非営利の個人利用目的に限り、ユーザーが所有または管理するApple製端末上で利用することができます。
-      </p>
+        <h2>1. 利用許諾</h2>
+        <p>
+          ユーザーは、本規約に同意することを条件として、本アプリを非営利の個人利用目的に限り、ユーザーが所有または管理するApple製端末上で利用することができます。
+        </p>
 
-      <h2>2. 禁止事項</h2>
-      <p>ユーザーは、本アプリの利用にあたり、以下の行為を行ってはなりません。</p>
-      <ul>
-        <li>本アプリの逆アセンブル、逆コンパイル、リバースエンジニアリングなど、ソースコードの解析を試みる行為。</li>
-        <li>本アプリ、提供者または第三者のサーバー、ネットワークの機能を破壊したり、妨害したりする行為。</li>
-        <li>本アプリの改変、複製、再配布、転送、または二次的著作物の作成。</li>
-        <li>法令または公序良俗に違反する行為。</li>
-        <li>その他、提供者が不適切と合理的に判断する行為。</li>
-      </ul>
+        <h2>2. 禁止事項</h2>
+        <p>ユーザーは、本アプリの利用にあたり、以下の行為を行ってはなりません。</p>
+        <ul>
+          <li>本アプリの逆アセンブル、逆コンパイル、リバースエンジニアリングなど、ソースコードの解析を試みる行為。</li>
+          <li>本アプリ、提供者または第三者のサーバー、ネットワークの機能を破壊したり、妨害したりする行為。</li>
+          <li>本アプリの改変、複製、再配布、転送、または二次的著作物の作成。</li>
+          <li>法令または公序良俗に違反する行為。</li>
+          <li>その他、提供者が不適切と合理的に判断する行為。</li>
+        </ul>
 
-      <h2>3. 免責事項</h2>
-      <ul>
-        <li>
-          <strong>自己責任での利用:</strong> 本アプリは「現状有姿（As-Is）」で提供され、動作の完全性、正確性、特定目的への適合性、安全性等についていかなる明示または黙示の保証も行いません。
-        </li>
-        <li>
-          <strong>損害への免責:</strong> 本アプリの利用、または利用できなかったことによって生じた一切の損害（データの消失、端末の不具合、逸失利益、金銭的損失など）について、提供者は故意または重過失がある場合を除き、一切の責任を負いません。
-        </li>
-        <li>
-          <strong>データのバックアップ:</strong> 重要なデータのバックアップ（iCloud同期等）は、ユーザーご自身の責任で行ってください。
-        </li>
-      </ul>
+        <h2>3. 免責事項</h2>
+        <ul>
+          <li>
+            <strong>自己責任での利用:</strong> 本アプリは「現状有姿（As-Is）」で提供され、動作の完全性、正確性、特定目的への適合性、安全性等についていかなる明示または黙示の保証も行いません。
+          </li>
+          <li>
+            <strong>損害への免責:</strong> 本アプリの利用、または利用できなかったことによって生じた一切の損害（データの消失、端末の不具合、逸失利益、金銭的損失など）について、提供者は故意または重過失がある場合を除き、一切の責任を負いません。
+          </li>
+          <li>
+            <strong>データのバックアップ:</strong> 重要なデータのバックアップ（iCloud同期等）は、ユーザーご自身の責任で行ってください。
+          </li>
+        </ul>
 
-      <h2>4. サブスクリプションおよび有料プラン</h2>
-      <p>本アプリは有料機能（プレミアムプラン）を提供しています。</p>
-      <ul>
-        <li><strong>決済と請求:</strong> 支払いはApple IDアカウントに対して請求されます。</li>
-        <li><strong>自動更新:</strong> 自動更新サブスクリプションは、現在の請求期間終了の24時間前までにキャンセルされない限り、自動的に更新されます。</li>
-        <li><strong>管理と解約:</strong> ユーザーはiOSの「設定」>「Apple ID」>「サブスクリプション」からいつでも契約内容の確認および自動更新の停止が行えます。</li>
-      </ul>
+        <h2>4. サブスクリプションおよび有料プラン</h2>
+        <p>本アプリは有料機能（プレミアムプラン）を提供しています。</p>
+        <ul>
+          <li><strong>決済と請求:</strong> 支払いは購入確定時にApple IDアカウントに対して請求されます。</li>
+          <li><strong>自動更新:</strong> 自動更新サブスクリプションは、現在の請求期間終了の24時間前までにキャンセルされない限り、自動的に更新されます。</li>
+          <li><strong>管理と解約:</strong> ユーザーはiOSの「設定」&gt;「Apple ID」&gt;「サブスクリプション」からいつでも契約内容の確認および自動更新の停止が行えます。</li>
+        </ul>
 
-      <h2>5. 規約の変更</h2>
-      <p>
-        提供者は、必要と判断した場合には、ユーザーの個別の承諾を得ることなく、いつでも本規約を変更できるものとします。変更後の規約は、本ページに掲載された時点から効力を生じます。
-      </p>
+        <h2>5. 規約の変更</h2>
+        <p>
+          提供者は、必要と判断した場合には、ユーザーの個別の承諾を得ることなく、いつでも本規約を変更できるものとします。変更後の規約は、本ページに掲載された時点から効力を生じます。
+        </p>
 
-      <h2>6. 準拠法および管轄裁判所</h2>
-      <p>
-        本規約の解釈および適用にあたっては日本法を準拠法とし、本アプリに起因または関連して生じた紛争については、日本の裁判所を管轄裁判所とします。
-      </p>
+        <h2>6. 準拠法および管轄裁判所</h2>
+        <p>
+          本規約の解釈および適用にあたっては日本法を準拠法とし、本アプリに起因または関連して生じた紛争については、日本の裁判所を管轄裁判所とします。
+        </p>
 
-      <div class="provider-info">
-        <p>制定日: 2026年7月20日</p>
-        <p>提供者: yanasezen</p>
-        <p>お問い合わせ: mailet.app.support@gmail.com</p>
+        <div class="provider-info">
+          <p>制定日: 2026年7月20日</p>
+          <p>提供者: yanasezen</p>
+          <p>お問い合わせ: mailet.app.support@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== English ==================== -->
+    <div data-lang-content="en">
+      <header>
+        <h1>Terms of Use (EULA)</h1>
+        <p class="last-updated">Effective Date: July 20, 2026 | Last Updated: October 13, 2026</p>
+      </header>
+
+      <div class="card">
+        <p>
+          These Terms of Use ("Terms") govern your use of the "Mailet" budget and expense tracking application ("App"). By using the App, you agree to be bound by these Terms.
+        </p>
+
+        <h2>1. License Grant</h2>
+        <p>
+          Subject to your compliance with these Terms, the Provider grants you a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial purposes on Apple-branded devices that you own or control.
+        </p>
+
+        <h2>2. Prohibited Conduct</h2>
+        <p>When using the App, you agree not to engage in any of the following activities:</p>
+        <ul>
+          <li>Reverse engineering, decompiling, disassembling, or attempting to derive the source code of the App.</li>
+          <li>Interfering with or disrupting the servers or networks of the App, the Provider, or any third party.</li>
+          <li>Modifying, copying, redistributing, transferring, or creating derivative works based on the App.</li>
+          <li>Violating any applicable laws, regulations, or public order and morals.</li>
+          <li>Any other conduct reasonably deemed inappropriate by the Provider.</li>
+        </ul>
+
+        <h2>3. Disclaimers &amp; Limitation of Liability</h2>
+        <ul>
+          <li>
+            <strong>Provided "As-Is":</strong> The App is provided on an "AS-IS" and "AS-AVAILABLE" basis without warranties of any kind, whether express or implied, including accuracy, completeness, fitness for a particular purpose, or non-infringement.
+          </li>
+          <li>
+            <strong>Limitation of Liability:</strong> Except in cases of willful misconduct or gross negligence by the Provider, the Provider shall not be liable for any damages arising from the use of or inability to use the App (including loss of data, device malfunction, lost profits, or financial loss).
+          </li>
+          <li>
+            <strong>Data Backup:</strong> You are solely responsible for maintaining backups of your important data (such as via iCloud sync).
+          </li>
+        </ul>
+
+        <h2>4. Subscriptions and Paid Plans</h2>
+        <p>The App offers optional paid features ("Mailet Premium") via auto-renewable subscriptions and/or one-time purchases.</p>
+        <ul>
+          <li><strong>Billing &amp; Payment:</strong> Payment will be charged to your Apple ID account at confirmation of purchase.</li>
+          <li><strong>Auto-Renewal:</strong> Auto-renewable subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current billing period.</li>
+          <li><strong>Free Trial:</strong> If a free trial is offered and you do not cancel before the trial ends, it will automatically convert into a paid subscription.</li>
+          <li><strong>Managing &amp; Canceling:</strong> You can manage your subscription and turn off auto-renewal anytime in iOS "Settings" &gt; "Apple ID" &gt; "Subscriptions".</li>
+        </ul>
+
+        <h2>5. Modifications to the Terms</h2>
+        <p>
+          The Provider reserves the right to modify these Terms at any time without individual notice. Updated Terms take effect immediately upon being posted on this page.
+        </p>
+
+        <h2>6. Governing Law and Jurisdiction</h2>
+        <p>
+          These Terms shall be governed by and construed in accordance with the laws of Japan. Any disputes arising out of or relating to the App shall be subject to the exclusive jurisdiction of the courts of Japan.
+        </p>
+
+        <div class="provider-info">
+          <p>Effective Date: July 20, 2026</p>
+          <p>Provider: yanasezen</p>
+          <p>Contact: mailet.app.support@gmail.com</p>
+        </div>
       </div>
     </div>
 
@@ -208,5 +345,28 @@
       <p>&copy; 2026 yanasezen. All rights reserved.</p>
     </footer>
   </div>
+
+  <script>
+    function updateButtons(lang) {
+      var btnJa = document.getElementById('btn-ja');
+      var btnEn = document.getElementById('btn-en');
+      if (btnJa && btnEn) {
+        btnJa.classList.toggle('active', lang === 'ja');
+        btnEn.classList.toggle('active', lang === 'en');
+      }
+    }
+    function setLanguage(lang) {
+      document.documentElement.setAttribute('data-active-lang', lang);
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('mailet_lang', lang); } catch (e) {}
+      updateButtons(lang);
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+    updateButtons(document.documentElement.getAttribute('data-active-lang') || 'ja');
+  </script>
 </body>
 </html>
